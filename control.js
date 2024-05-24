@@ -12,11 +12,12 @@ class Control {
         this.queue = {};            //queue of songs
         this.connection = {};       //check connection for VC
         this.player = {};           //stores the current player, so i can access globally
+        this.np = {};
     }
 
     // show instructions for this bot
     help(msg) {
-        msg.reply('Integrated by **loliking**  \n\n**[!play + "Youtube link" / !play + "Youtube playlist link"]** to play a song / a list of song \n\n**[!pause]** to pause the music \n\n**[!resume]** to resume the music \n\n**[!skip]** to skip current song \n\n**[!q]** to display the queue \n\n**[!quit]** the bot rage quits');
+        msg.reply('Integrated by **loliking**  \n\n**[!play + "Youtube link" / !play + "Youtube playlist link"]** to play a song / a list of song \n\n**[!pause]** to pause the music \n\n**[!resume]** to resume the music \n\n**[!skip]** to skip current song \n\n**[!q]** to display the queue \n\n**[!delq]** to clean the queue\n\n**[!np]** to show the current song playing\n\n**[!quit]** the bot rage quits');
     }
 
     // check if its playlist
@@ -25,6 +26,18 @@ class Control {
             return true;
         }
         return false;
+    }
+
+    // check the song playing now
+    np(msg){
+        const guildID = msg.guildId;
+
+        // if queue have songs, play it, else isPlaying = false
+        if (this.isPlaying[guildID]) {
+            msg.reply(this.np);
+        } else {
+            msg.reply('Nothing is playing now, brother');
+        }
     }
 
     // adds bot into VC, process commands, song info etc.
@@ -172,6 +185,9 @@ class Control {
             this.connection[guildID].subscribe(player);
             this.player[guildID] = player;
 
+            //save the song playing now
+            this.np = this.queue[guildID][0].name;
+            
             // remove the song palying now, shift() = pop the 1st song from array
             this.queue[guildID].shift();    
 

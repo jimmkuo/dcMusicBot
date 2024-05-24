@@ -80,6 +80,7 @@ function isCommand(msg){
     case '!q':
     case '!resume':
     case '!skip':
+    case '!np':
       console.log(temp);
       return true;
     default:
@@ -127,6 +128,9 @@ client.on(Events.MessageCreate, async (msg) => {
         break;
       case '!skip':
         c1.skip(msg);
+        break;
+      case '!np':
+        c1.np(msg);
         break;
     default:
       console.log('no command chosen... ');
