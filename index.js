@@ -7,10 +7,6 @@ const { token, YTkey, botPrefix, } = require('./config.json');
 const ytpl = require('ytpl');
 const play_dl = require('play-dl');
 const ytdl = require('ytdl-core');
-//const ytdl = require('ytdl-core-discord');
-const { exec } = require('child_process');
-const player = require('play-sound')(opts = {});
-const sugar_rush = 'https://youtu.be/_c3JIkgfo4Q?si=UF32oFWhbBy3mXYh';
 const { createAudioPlayer, createAudioResource, joinVoiceChannel, NoSubscriberBehavior, AudioPlayerStatus } = require('@discordjs/voice');
 ////
 
@@ -40,6 +36,7 @@ const client = new Client({
 // It makes some properties non-nullable.
 client.once(Events.ClientReady, c => {
   console.log(`Ready! Logged in as ${c.user.tag})`)
+  // client.channels.send(`Yo gay bois, type '!help' to show the commands`);
 });
 
 // Log in to Discord with your client's token
@@ -63,9 +60,6 @@ client.on(Events.MessageDelete, (msg) => {
   userF.fdel(msg);
 });
 
-client.on(Events.MessageUpdate, (msg) => {
-  userF.fedit(msg);
-});
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////

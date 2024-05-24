@@ -63,6 +63,7 @@ class Control {
                 this.queue[guildID] = [];
             }
 
+            let music_name = null;
             let list_name = null;
 
             // check if is playlist (isPL)
@@ -92,7 +93,7 @@ class Control {
 
                 // get video info
                 const res = await play_dl.video_basic_info(musicURL);
-                music_name = res.video_details.title;
+                let music_name = res.video_details.title;
 
                 // write into queue
                 this.queue[guildID].push({
@@ -105,7 +106,16 @@ class Control {
 
             // if now playing, add this song into the queue, else play now
             if (this.isPlaying[guildID]) {
-                msg.reply(`${musicName} added into the queue`);
+                if(isPL){
+                    // get playlist info into res
+                    const res = await play_dl.playlist_info(musicURL);
+                    list_name = res.title;      //music
+                    msg.reply(`**${list_name}** added into the queue`)
+                }else{
+                    const res = await play_dl.video_basic_info(musicURL);
+                    let music_name = res.video_details.title;
+                    msg.reply(`${music_name} added into the queue`)
+                }
             } else {
                 this.isPlaying[guildID] = true;
                 msg.reply(`Playing：${this.queue[guildID][0].name}`);

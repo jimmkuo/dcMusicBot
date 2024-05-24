@@ -10,11 +10,14 @@
   "description": "",
   "dependencies": {
     "@discord-player/extractor": "^4.4.7",
-    "@discordjs/builders": "^1.8.1",
     "@discordjs/voice": "^0.16.0",
+    "discord-player": "^6.6.9",
     "discord.js": "^14.15.2",
-    "play-dl": "^1.9.6",
-    "play-sound": "^1.1.6",
+    "ffmpeg-static": "^5.2.0",
+    "install": "^0.13.0",
+    "libsodium-wrappers": "^0.7.13",
+    "npm": "^10.8.0",
+    "play-dl": "^1.9.7",
     "ytdl-core": "^4.11.5",
     "ytpl": "^2.3.0"
   },
